@@ -10,7 +10,7 @@ public class MoveCharController : MonoBehaviour
 
     [SerializeField]Camera TPCamera;
     [SerializeField]Camera FPCamera;
-    public float mouseSens = 30f;
+    public float mouseSens = 1f;
 
     void Awake()
     {
@@ -58,9 +58,11 @@ public class MoveCharController : MonoBehaviour
     private void OnEnable()
     {
         inputSystem.Enable();
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnDisable()
     {
         inputSystem.Disable();
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
