@@ -12,17 +12,30 @@ public class MoveCharController : MonoBehaviour
     [SerializeField]Camera FPCamera;
     public float mouseSens = 1f;
 
+
+    Animator anim;
+
     void Awake()
     {
         inputSystem = new MyInputSystem();
         moveWithInputSystem();
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         Vector3 move = new Vector3(inputVector.x, 0, inputVector.y);
         controller.Move(move * speed * Time.deltaTime);
+        if (move != Vector3.zero)
+        {
+            anim.SetBool("running", true);
+            transform.forward = move;
+        }
+        else
+        {
+            anim.SetBool("running", false);
+        }
     }
 
     void moveWithInputSystem()
